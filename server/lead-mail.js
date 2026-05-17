@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-const RECIPIENT_EMAIL = 'siddhantvij001@gmail.com';
+const RECIPIENT_EMAIL = 'info@aluminous.in';
 
 export async function sendLeadEmail(payload, env = process.env) {
   const smtpUser = env.GMAIL_SMTP_USER || '';
