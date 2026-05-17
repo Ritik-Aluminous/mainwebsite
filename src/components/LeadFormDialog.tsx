@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { submitLead } from "@/lib/lead-api";
 
 interface LeadFormDialogProps {
   open: boolean;
@@ -41,13 +41,9 @@ const LeadFormDialog = ({ open, onOpenChange }: LeadFormDialogProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    try {
-      const { data, error } = await supabase.functions.invoke('send-lead-email', {
-        body: formData,
-      });
 
-      if (error) throw error;
+    try {
+      await submitLead(formData);
 
       toast({
         title: "Enquiry Submitted!",
@@ -64,7 +60,7 @@ const LeadFormDialog = ({ open, onOpenChange }: LeadFormDialogProps) => {
       });
       onOpenChange(false);
     } catch (error) {
-      console.error('Error submitting lead:', error);
+      console.error("Error submitting lead:", error);
       toast({
         title: "Submission Failed",
         description: "Something went wrong. Please try again.",
