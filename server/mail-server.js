@@ -2,7 +2,7 @@ import http from 'node:http';
 import nodemailer from 'nodemailer';
 
 const PORT = Number(process.env.MAIL_SERVER_PORT || 3001);
-const RECIPIENT_EMAIL = 'siddhantvij001@gmail.com';
+const RECIPIENT_EMAIL = 'info@aluminous.in';
 const SMTP_USER = process.env.GMAIL_SMTP_USER || '';
 const SMTP_PASSWORD = process.env.GMAIL_SMTP_PASSWORD || '';
 
